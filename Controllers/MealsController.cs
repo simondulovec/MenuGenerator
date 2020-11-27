@@ -27,7 +27,6 @@ namespace MenuGenerator.Controllers
         //    var applicationDbContext = _context.Meal.Include(m => m.Complexity).Include(m => m.MealKind).Include(m => m.Popularity).Include(m => m.Price).Include(m => m.SoupKind).Include(m => m.Volume).Include(m => m.Weight);
         //    return View(await applicationDbContext.ToListAsync());
         //}
-
         public async Task<IActionResult> DisplayMealsAsync()
         {
             var meals = _context.Meal.Where(m => m.MealKindID != null).
@@ -37,6 +36,28 @@ namespace MenuGenerator.Controllers
                 Include(m => m.Price).
                 Include(m => m.Weight);
             return View(await meals.ToListAsync());
+        }
+
+        public async Task<IActionResult> DetailsMeal(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var meal = await _context.Meal
+                .Include(m => m.Complexity)
+                .Include(m => m.MealKind)
+                .Include(m => m.Popularity)
+                .Include(m => m.Price)
+                .Include(m => m.Weight)
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (meal == null)
+            {
+                return NotFound();
+            }
+
+            return View(meal);
         }
 
         // GET: Meals/Details/5

@@ -610,3 +610,4 @@ C:\Users\Simon\Documents\GIT\MenuGenerator\obj\Release\netcoreapp3.1\MenuGenerat
 C:\Users\Simon\Documents\GIT\MenuGenerator\obj\Release\netcoreapp3.1\MenuGenerator.dll
 C:\Users\Simon\Documents\GIT\MenuGenerator\obj\Release\netcoreapp3.1\MenuGenerator.pdb
 C:\Users\Simon\Documents\GIT\MenuGenerator\obj\Release\netcoreapp3.1\MenuGenerator.genruntimeconfig.cache
+C:\Users\Simon\Documents\GIT\MenuGenerator\obj\Release\netcoreapp3.1\Razor\Views\Meals\DetailsMeal.cshtml.g.cs
