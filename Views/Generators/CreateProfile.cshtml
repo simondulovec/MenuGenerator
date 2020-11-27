@@ -1,0 +1,62 @@
+﻿@model MealKindsAndWeekDaysViewModel
+
+<h1>Vytvoriť profil</h1>
+
+<form method="post" asp-action="SaveProfile">
+    <div class="row">
+        <div class="col-lg">
+            <input type="text" name="profileName" />
+            <input type="number" name="uniqueMeals" />
+            <input type="submit" />
+        </div>
+    </div>
+    @foreach (var day in Model.Tyzden)
+    {
+        <div class="row">
+            <div class="col-lg font-weight-bold">
+                @day.Nazov
+            </div>
+        </div>
+        <div class="row">
+            @if (day.Nazov != "Sobota" && day.Nazov != "Nedeľa")
+            {
+                //dni okrem soboty a nedele
+                for (int i = 1; i < 5; i++)
+                {
+                    <div class="col-lg-2 mr-2">
+                        <select class="selectpicker mb-2" name="p_@day.Nazov@i">
+                            @foreach (var pop in Model.Oblubenost)
+                            {
+                                <option value="@pop.ID">@pop.Nazov</option>
+                            }
+                        </select>
+                        <select class="selectpicker" multiple name="@day.Nazov@i">
+                            @foreach (var kind in Model.DruhJedla)
+                            {
+                                <option value="@kind.ID">@kind.Nazov</option>
+                            }
+                        </select>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-lg-2">
+                    <select class="selectpicker mb-2" name="p_@day.Nazov">
+                        @foreach (var pop in Model.Oblubenost)
+                        {
+                            <option value="@pop.ID">@pop.Nazov</option>
+                        }
+                    </select>
+                    <select class="selectpicker" multiple name="@day.Nazov">
+                        @foreach (var kind in Model.DruhJedla)
+                        {
+                            <option value="@kind.ID">@kind.Nazov</option>
+                        }
+                    </select>
+                </div>
+            }
+        </div>
+
+    }
+</form>

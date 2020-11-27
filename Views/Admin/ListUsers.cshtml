@@ -1,0 +1,25 @@
+﻿@model IList<Microsoft.AspNetCore.Identity.IdentityUser>
+
+<h1 class="text-light">Užívatelia</h1>
+
+@*na uzivateloch sa pracuje...*@
+@*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>*@
+
+@if (Model.Any())
+{
+    foreach (var user in Model)
+    {
+        <div class="card">
+            <h5 class="card-header">ID: @user.Id</h5>
+            <div class="card-body">
+                <h5 class="card-title">Meno: @user.UserName</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p class="text-light">Žiadny užívatelia</p>
+}

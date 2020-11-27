@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MenuGenerator.Models.Meal>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h1>Jedlá</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="ml-tb" class="table">
+    <thead>
+        <tr>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.MealKind)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.SoupKind)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Nazov)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Popularity)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Complexity)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Volume)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Alergeny)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.MealKind.Nazov)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.SoupKind.Nazov)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Nazov)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Popularity.Nazov)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Complexity.Nazov)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Price.ID)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Weight.Hmotnost)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Volume.ID)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Alergeny)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+

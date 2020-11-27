@@ -1,0 +1,77 @@
+﻿@model OrderNameDateViewModel;
+
+@functions{
+    public string GetStringDate(DateTime date)
+    {
+        return date.Day + "." + date.Month + "." + date.Year;
+    }
+}
+
+@{
+    int INDEX = 0;
+    int DAY = 0;
+    int mealsInWeek = 4;
+    int saturdayMeal = 20;
+    int sundayMeal = 21;
+    int saturday = 4;
+    int sunday = 6;
+    List<string> week = new List<string>() { "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota", "Nedeľa" };
+
+}
+
+<div class="row">
+    <div class="col-lg d-flex">
+        <span class="text-light h1">Detaily</span>
+        <span class="ml-4 mt-3">
+            <a asp-action="Index" class="text-light">
+                <img src="~/bootstrap-icons/card-text.svg" class="zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Zobraziť položky">
+            </a>
+        </span>
+    </div>
+</div>
+
+<h4 class="text-light mb-3">Od @GetStringDate(Model.DatumPondelka) do @GetStringDate(Model.DatumPondelka.AddDays(sunday))</h4>
+
+@if (Model.JedlaPoradie.Any())
+{
+    @foreach (var meal in Model.JedlaPoradie)
+    {
+        if (INDEX % mealsInWeek == 0 && INDEX != saturdayMeal && INDEX != sundayMeal)
+        {
+            <div class="row ml-1 mr-1 mt-1">
+                <div class="col-lg-6 pt-1 font-weight-bold text-light black">
+                    @week[DAY] (@GetStringDate(Model.DatumPondelka.AddDays(DAY)))
+                </div>
+            </div>
+            DAY += 1;
+        }
+        else if (INDEX == saturdayMeal)
+        {
+            <div class="row mt-1 ml-1 mr-1">
+                <div class="col-lg-6 pt-1 font-weight-bold text-light black">
+                    @week[saturday] (@GetStringDate(Model.DatumPondelka.AddDays(saturday)))
+                </div>
+            </div>
+        }
+        else if (INDEX == sundayMeal)
+        {
+            <div class="row mt-1 ml-1 mr-1">
+                <div class="col-lg-6 pt-1 font-weight-bold text-light black">
+                    @week[sunday] (@GetStringDate(Model.DatumPondelka.AddDays(sunday)))
+                </div>
+            </div>
+        }
+
+        <div class="row ml-1 mr-1">
+            <div class="col-lg-6 pb-2 text-light black">
+                @meal.Nazov
+            </div>
+        </div>
+
+        INDEX += 1;
+    }
+}
+else
+{
+    <p class="text-light">Žiadne výsledky</p>
+}

@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    Layout = "_homeLayout";
+}
+
+<div class="text-center text-light">
+    <h1 class="display-4"> Vitajte.</h1>
+    <p class="f-size">Pre pokračovanie sa prihláste do svojho účtu.</p>
+    <a class="m-0 p-0" asp-area="Identity" asp-page="/Account/Login">
+        <img class="zoom-sm hvr-csr-pt m-0 p-0" src="~/bootstrap-icons/arrow-right-circle.svg" alt="" width="60" height="60" title="Pokračovať">
+    </a>
+</div>

@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+
+<body class="min-vh-100 d-flex">
+
+    <header id="hdr">
+        <div class="container-fluid">
+            <nav id="tp-top" class="navbar navbar-light">
+                <button class="navbar-toggler" type="button" onclick="adminPanelToggle()">
+                    <img class="zoom-sm hvr-csr-pt" src="~/bootstrap-icons/list.svg" alt="" width="32" height="32" title="Skryť/Zobraziť panel">
+                </button>
+                <a class="navbar-brand text-light zoom-nano" asp-action="Index" asp-controller="Admin">
+                    <img src="~/img/logo-light.svg" width="50" height="50" class="m-0 p-0">
+                    Vulkano generátor
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <menu id="adm-pnl" class="shadow">
+        <ul class="nav flex-column mt-2">
+            <li class="nav-item">
+                <a class="nav-link zoom-sm-lft text-light" asp-action="Index" asp-controller="Admin">
+                    <img src="~/bootstrap-icons/house.svg" class="mr-2" alt="" width="16" height="16" title="Panel">
+                    @Context.Request.Cookies["user"]
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-divider">
+                </div>
+            </li>
+            <li class="nav-item my-1">
+                <a class="nav-link zoom-sm-lft text-light" asp-action="GenerateMenu" asp-controller="Admin">
+                    <img src="~/bootstrap-icons/journal-plus.svg" class="mr-2" alt="" width="16" height="16" title="Vygenerovať menu">
+                    Vygenerovať menu
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link zoom-sm-lft text-light" asp-action="Index" asp-controller="Menus">
+                    <img src="~/bootstrap-icons/journal-text.svg" class="mr-2" alt="" width="16" height="16" title="Zobraziť menu">
+                    Zobraziť menu
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link zoom-sm-lft text-light" asp-action="Import" asp-controller="Admin">
+                    <img src="~/bootstrap-icons/file-earmark-arrow-down.svg" class="mr-2" alt="" width="16" height="16" title="Importovať">
+                    Importovať
+                </a>
+            </li>
+            <li class="nav-item dropdown zoom-sm-lft">
+                <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="~/bootstrap-icons/gear.svg" class="mr-2" alt="" width="16" height="16" title="Nastavenia">
+                    Nastavenia
+                </a>
+                <div class="dropdown-menu w-75">
+                    @*<a class="nav-link zoom-sm-lft text-light" asp-action="ListUsers" asp-controller="Admin">
+                            <img src="~/bootstrap-icons/arrow-repeat.svg" class="mr-2" alt="" width="16" height="16" title="Profil generátora">
+                            Profily generátora
+                        </a>*@
+                    <a class="nav-link zoom-sm-lft text-light" asp-action="ListUsers" asp-controller="Admin">
+                        <img src="~/bootstrap-icons/person.svg" class="mr-2" alt="" width="16" height="16" title="Užívatelia">
+                        Užívatelia
+                    </a>
+                    <a class="nav-link zoom-sm-lft text-light" asp-action="DisplayMeals" asp-controller="Meals">
+                        <img src="~/bootstrap-icons/receipt.svg" class="mr-2" alt="" width="16" height="16" title="Jedlá/Polievky">
+                        Jedlá/Polievky
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown-divider">
+                </div>
+            </li>
+            <li>
+                <form class="form-inline logout-form m-0 p-0 " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="btn shadow-none zoom-sm-lft text-light">
+                        <img class="mr-2" src="~/bootstrap-icons/box-arrow-left.svg" alt="" width="16" height="16" title="Odhlásiť sa">
+                        Odhlásiť sa
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </menu>
+
+    <div id="ctn" class="container-fluid">
+        @RenderBody()
+    </div>
+
+    <footer id="ftr" class="w-100 black-dark">
+        <div id="co" class="text-muted mb-1 mr-2">
+            &copy; 2020 - Šimon Dulovec
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/bootstrap-select/bootstrap-select.js"></script>
+    <script src="~/bootstrap-select/defaults-sk_SK.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

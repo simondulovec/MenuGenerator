@@ -1,0 +1,46 @@
+﻿@model MenuGenerator.Models.Schedule
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Schedule</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DatumPodavania" class="control-label"></label>
+                <input asp-for="DatumPodavania" class="form-control" />
+                <span asp-validation-for="DatumPodavania" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuID" class="control-label"></label>
+                <select asp-for="MenuID" class ="form-control" asp-items="ViewBag.MenuID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MealID" class="control-label"></label>
+                <select asp-for="MealID" class ="form-control" asp-items="ViewBag.MealID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PoradieJedla" class="control-label"></label>
+                <input asp-for="PoradieJedla" class="form-control" />
+                <span asp-validation-for="PoradieJedla" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

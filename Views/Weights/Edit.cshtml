@@ -1,0 +1,37 @@
+﻿@model MenuGenerator.Models.Weight
+{
+    ViewData["Title"] = "Edit";
+    Layout = "_mealOptionsLayout";
+}
+
+<h1 class="text-light">Upraviť</h1>
+
+<h4 class="text-light">Hmotnosť</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Hmotnost" class="control-label text-light"></label>
+                <input asp-for="Hmotnost" class="form-control" />
+                <span asp-validation-for="Hmotnost" class="text-danger"></span>
+            </div>
+            <span class="form-group">
+                <button type="submit" class="btn">
+                    <img src="~/bootstrap-icons/check-circle.svg" class="zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Uložiť">
+                </button>
+            </span>
+            <span class="form-group">
+                <a asp-action="Index">
+                    <img src="~/bootstrap-icons/card-text.svg" class="zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Zobraziť položky">
+                </a>
+            </span>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

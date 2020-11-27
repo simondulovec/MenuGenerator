@@ -1,0 +1,179 @@
+﻿@model MyMealsViewModel;
+
+@{
+    int INDEX = 0;
+    int DAY = 0;
+    int mealsInWeek = 4;
+    int saturdayMeal = 20;
+    int sundayMeal = 21;
+    int saturday = 5;
+    int sunday = 6;
+}
+
+<div class="row">
+    <div class="col-lg-4">
+        <h1 class="text-light">Vygenerované menu</h1>
+    </div>
+</div>
+
+<ul class="nav ml-3">
+    <li class="nav-item">
+        <input class="dt-ipt mt-1 ml-3" form="menu-form" type="date" name="date">
+    </li>
+    <li class="nav-item ml-3">
+        <select class="selectpicker mt-1" name="profileID">
+            @foreach (var profile in Model.Generators)
+            {
+                <option class="text-light" value="@profile.ID">@profile.NazovProfilu</option>
+            }
+        </select>
+    </li>
+    <li class="nav-item ml-3">
+        <button form="menu-form" type="submit" class="btn zoom-sm mb-1 shadow-none">
+            <img src="~/bootstrap-icons/journal-plus.svg" alt="" width="32" height="32" title="Uložiť">
+        </button>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link mb-1 zoom-sm" asp-action="GenerateMenu" asp-controller="Admin">
+            <img src="~/bootstrap-icons/arrow-clockwise.svg" alt="" width="32" height="32" title="Vygenerovať">
+        </a>
+    </li>
+    <li class="nav-item ml-3">
+        <span id="save-err" class="text-danger font-weight-bold">Zvoľte dátum a doplnte všetky chýbajúce jedlá!</span>
+        <span id="save-scs" class="text-success font-weight-bold">Menu bolo úsepešne uložené!</span>
+    </li>
+</ul>
+
+@if (Model.MenuMeals.Any())
+{
+    <form id="menu-form" method="post" asp-action="SaveMenu" asp-controller="Admin" class="mt-2">
+        @foreach (var meal in Model.MenuMeals)
+        {
+            if (INDEX % mealsInWeek == 0 && INDEX != saturdayMeal && INDEX != sundayMeal)
+            {
+                <div class="row mt-1">
+                    <div class="col-lg ml-1 mr-1 pt-1 font-weight-bold text-white green">
+                        @Model.Week[DAY]
+                    </div>
+                    @if (Model.DruhePorovnanie != null)
+                    {
+                        <div class="col-lg text-white pt-1 font-weight-bold orange mr-1">
+                            @Model.Week[DAY]
+                        </div>
+                    }
+
+                    @if (Model.PrvePorovnanie != null)
+                    {
+                        <div class="col-lg text-white pt-1 font-weight-bold blue mr-1">
+                            @Model.Week[DAY]
+                        </div>
+                    }
+
+                </div>
+                DAY += 1;
+            }
+            else if (INDEX == saturdayMeal)
+            {
+                <div class="row mt-1">
+                    <div class="col-lg ml-1 mr-1 pt-1 font-weight-bold text-white green">
+                        @Model.Week[saturday]
+                    </div>
+                    @if (Model.DruhePorovnanie != null)
+                    {
+                        <div class="col-lg text-white pt-1 font-weight-bold orange mr-1">
+                            @Model.Week[saturday]
+                        </div>
+                    }
+
+                    @if (Model.PrvePorovnanie != null)
+                    {
+                        <div class="col-lg text-white pt-1 font-weight-bold blue mr-1">
+                            @Model.Week[saturday]
+                        </div>
+                    }
+
+                </div>
+            }
+            else if (INDEX == sundayMeal)
+            {
+                <div class="row mt-1">
+                    <div class="col-lg ml-1 mr-1 pt-1 font-weight-bold text-white green">
+                        @Model.Week[sunday]
+                    </div>
+                    @if (Model.DruhePorovnanie != null)
+                    {
+                        <div class="col-lg text-white pt-1 font-weight-bold orange mr-1">
+                            @Model.Week[sunday]
+                        </div>
+                    }
+
+                    @if (Model.PrvePorovnanie != null)
+                    {
+                        <div class="col-lg text-white pt-1 font-weight-bold blue mr-1">
+                            @Model.Week[sunday]
+                        </div>
+                    }
+
+                </div>
+            }
+            <div class="row">
+                @*skryty input pre posielanie hodnoty do controllera*@
+                <input type="number" id="id_@INDEX" class="hidden" name="mealIDs" value="@meal.ID" />
+
+                <div id="secondary_@INDEX" class="hidden col-lg green ml-1 mr-1">
+                    <a onclick="show_hide('#primary_@INDEX', '#secondary_@INDEX')">
+                        <img class="zoom hvr-csr-pt" src="~/bootstrap-icons/x.svg" alt="" width="32" height="32" title="Zrušiť">
+                    </a>
+                    <select id="select_@INDEX" class="selectpicker w-75" data-live-search="true" data-size="5" onchange="confirm_change('@INDEX')">
+                        @foreach (var item in Model.AllMeals)
+                        {
+                            <option class="text-light" value="@item.ID*@item.Nazov">@item.Nazov</option>
+                        }
+                    </select>
+                </div>
+
+                <div id="primary_@INDEX" class="col-lg pb-2 pt-2 green ml-1 mr-1">
+                    <a onclick="show_hide('#secondary_@INDEX', '#primary_@INDEX')">
+                        <img class="zoom hvr-csr-pt" src="~/bootstrap-icons/pen.svg" alt="" width="16" height="16" title="Upraviť">
+                    </a>
+                    <span class="ml-2 text-white" id="name_@INDEX">@meal.Nazov</span>
+                </div>
+
+                @if (Model.DruhePorovnanie != null)
+                {
+                    <div class="col-lg text-white orange mr-1">
+                        @Model.DruhePorovnanie[INDEX]
+                    </div>
+                }
+
+                @if (Model.PrvePorovnanie != null)
+                {
+                    <div class="col-lg text-white blue mr-1 ">
+                        @Model.PrvePorovnanie[INDEX]
+                    </div>
+                }
+
+            </div>
+            INDEX += 1;
+        }
+    </form>
+}
+else
+{
+    <p>Žiadne výsledky</p>
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js"></script>
+
+@if (TempData["saveMenu"] != null)
+{
+    if (TempData["saveMenu"].ToString() == "error")
+    {
+        <script>show_save_err()</script>
+    }
+    else if (TempData["saveMenu"].ToString() == "success")
+    {
+        <script>show_save_scs()</script>
+    }
+}

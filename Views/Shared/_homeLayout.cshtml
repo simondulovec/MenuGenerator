@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body class="h-100 d-flex">
+
+    <div class="container-fluid d-flex">
+        <main class="m-auto">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer id="ftr" class="w-100">
+                <div id="co" class="text-muted mb-1 mr-2">
+                    &copy; 2020 - Šimon Dulovec
+                </div>  
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

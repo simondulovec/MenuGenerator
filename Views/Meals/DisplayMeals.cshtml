@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MenuGenerator.Models.Meal>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_mealOptionsLayout.cshtml";
+}
+
+<ul class="nav mt-2 mb-2">
+    <li class="nav-item">
+        <h4 class="nav-link text-light">Jedlá</h4>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link btn rounded-0 shadow-none" asp-action="CreateMeal">
+            <img src="~/bootstrap-icons/plus-circle.svg" class="zoom-sm hvr-csr-pt mr-2" alt="" width="32" height="32" title="Vytvoriť">
+        </a>
+    </li>
+</ul>
+
+<table id="ml-tb" class="table table-sm table-borderless">
+    <thead>
+        <tr>
+            <th class="text-light black-dark">
+                Druh jedla
+            </th>
+            <th class="text-light black-dark">
+                Názov
+            </th>
+            <th class="text-light black-dark">
+                Obľúbenosť
+            </th>
+            <th class="text-light black-dark">
+                Zložitosť
+            </th>
+            <th class="text-light black-dark">
+                Cena
+            </th>
+            <th class="text-light black-dark">
+                Hmotnosť
+            </th>
+            <th class="text-light black-dark">
+                Alergény
+            </th>
+            <th class="text-light black-dark"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-light black">
+                    @Html.DisplayFor(modelItem => item.MealKind.Nazov)
+                </td>
+                <td class="text-light black">
+                    @Html.DisplayFor(modelItem => item.Nazov)
+                </td>
+                <td class="text-light black">
+                    @Html.DisplayFor(modelItem => item.Popularity.Nazov)
+                </td>
+                <td class="text-light black">
+                    @Html.DisplayFor(modelItem => item.Complexity.Nazov)
+                </td>
+                <td class="text-light black">
+                    @Html.DisplayFor(modelItem => item.Price.Cena)
+                </td>
+                <td class="text-light black">
+                    @Html.DisplayFor(modelItem => item.Weight.Hmotnost)
+                </td>
+                <td class="text-light black">
+                    @Html.DisplayFor(modelItem => item.Alergeny)
+                </td>
+                <td class="text-light black">
+                    <a class="mr-2" asp-action="EditMeal" asp-route-id="@item.ID">
+                        <img src="~/bootstrap-icons/pen.svg" class="zoom-sm hvr-csr-pt" alt="" width="20" height="20" title="Upraviť">
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.ID">
+                        <img src="~/bootstrap-icons/eye.svg" class="zoom-sm hvr-csr-pt" alt="" width="20" height="20" title="Detaily">
+                    </a>
+                    @*mazanie nie je povolene
+                        <a asp-action="Delete" asp-route-id="@item.ID">
+                            <img src="~/bootstrap-icons/trash.svg" class="zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Odstrániť">
+                        </a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

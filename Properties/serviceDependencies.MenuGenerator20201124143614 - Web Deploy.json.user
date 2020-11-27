@@ -1,0 +1,30 @@
+{
+  "dependencies": {},
+  "parameters": {
+    "MenuGenerator20201124143614.resourceGroupLocation": {
+      "Name": "MenuGenerator20201124143614.resourceGroupLocation",
+      "Type": null,
+      "Value": "westeurope"
+    },
+    "MenuGenerator20201124143614.resourceName": {
+      "Name": "MenuGenerator20201124143614.resourceName",
+      "Type": null,
+      "Value": "MenuGenerator20201124143614"
+    },
+    "MenuGenerator20201124143614.resourceGroupName": {
+      "Name": "MenuGenerator20201124143614.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "MenuGenerator20201124143614ResourceGroup"
+    },
+    "MenuGenerator20201124143614.subscriptionId": {
+      "Name": "MenuGenerator20201124143614.subscriptionId",
+      "Type": "subscription",
+      "Value": "7379a91b-beaa-42bf-b905-2d8e1f6c79e5"
+    },
+    "subscriptionId": {
+      "Name": "subscriptionId",
+      "Type": "subscription",
+      "Value": "7379a91b-beaa-42bf-b905-2d8e1f6c79e5"
+    }
+  }
+}

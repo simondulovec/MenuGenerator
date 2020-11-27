@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MenuGenerator.Models.Menu>
+
+@functions{
+    public string GetStringDate(DateTime date)
+    {
+        return date.Day + "." + date.Month + "." + date.Year;
+    }
+}
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+
+    int sunday = 6;
+}
+
+<h1 class="text-white">Menu</h1>
+
+<div class="d-flex flex-row flex-wrap">
+    @foreach (var item in Model)
+    {
+        <div class="card m-2 rounded-0 black border-0">
+            <img src="~/img/menu_img.jpg" class="card-img-top rounded-0 p-0 m-0" alt="...">
+            <div class="card-body">
+                <h5 class="card-title text-light">Od @GetStringDate(item.DatumPondelka) do @GetStringDate(item.DatumPondelka.AddDays(sunday))</h5>
+                <p class="card-text text-light">Dátum vytvorenia: @GetStringDate(item.DatumVytvorenia)</p>
+                <form id="del-mn" asp-action="Delete" class="d-flex" asp-route-id="@item.ID">
+                    <a class="mr-3 mt-1" asp-action="Display" asp-controller="Menus" asp-route-id="@item.ID">
+                        <img src="~/bootstrap-icons/eye.svg" class="zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Detaily">
+                    </a>
+                    <a id="primary_@item.ID" class="mt-1" onclick="show_hide('#secondary_@item.ID', '#primary_@item.ID')">
+                        <img src="~/bootstrap-icons/trash.svg" class="zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Odstrániť">
+                    </a>
+                    <span id="secondary_@item.ID" class="hidden">
+                        <a onclick="show_hide('#primary_@item.ID', '#secondary_@item.ID')">
+                            <img src="~/bootstrap-icons/x.svg" class="zoom-sm hvr-csr-pt" alt="" width="42" height="42" title="Zrušiť">
+                        </a>
+                        <button class="btn m-0 p-0" type="submit">
+                            <img src="~/bootstrap-icons/trash.svg" class="zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Odstrániť">
+                        </button>
+                    </span>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+

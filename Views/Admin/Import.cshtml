@@ -1,0 +1,35 @@
+﻿
+<h1 class="text-light">Importovať</h1>
+
+<ul class="nav flex-column">
+    <li class="nav-item mt-3">
+        <form class="form-inline text-light" enctype="multipart/form-data" method="post" asp-action="ImportFile" asp-controller="Admin">
+            <input type="file" name="excelfile" accept=".xlsx" />
+            <button class="ml-2 btn shadow-none" type="submit">
+                <img src="~/bootstrap-icons/file-earmark-arrow-down.svg" class="mr-2 zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Importovať">
+            </button>
+            <span class="ml-2 text-danger" id="imp-err"></span>
+            <span class="ml-2 text-danger" id="save-err"></span>
+            <span class="ml-2 text-success" id="save-scs"></span>
+        </form>
+    </li>
+</ul>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js"></script>
+
+@if (TempData["import"] != null)
+{
+    if (TempData["import"].ToString() == "error")
+    {
+        <script>show_msg("#imp-err", 'Vyberte súbor s príponou xlsx!')</script>
+    }
+    else if (TempData["import"].ToString() == "failed")
+    {
+        <script>show_msg("#save-err", "Pri importovaní sa vyskytla chyba!")</script>
+    }
+    else if (TempData["import"].ToString() == "success")
+    {
+        <script>show_msg("#save-scs", "Dáta boli úspešne importované!")</script>
+    }
+}

@@ -1,0 +1,68 @@
+﻿@model MenuGenerator.Models.Meal
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_mealOptionsLayout.cshtml";
+}
+
+<h1 class="text-light">Upraviť</h1>
+
+<h4 class="text-light">Jedlo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditMeal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="MealKindID" class="control-label text-light"></label>
+                <select asp-for="MealKindID" class="form-control" asp-items="ViewBag.MealKindID"></select>
+                <span asp-validation-for="MealKindID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nazov" class="control-label text-light"></label>
+                <input asp-for="Nazov" class="form-control" />
+                <span asp-validation-for="Nazov" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PopularityID" class="control-label text-light"></label>
+                <select asp-for="PopularityID" class="form-control" asp-items="ViewBag.PopularityID"></select>
+                <span asp-validation-for="PopularityID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ComplexityID" class="control-label text-light"></label>
+                <select asp-for="ComplexityID" class="form-control" asp-items="ViewBag.ComplexityID"></select>
+                <span asp-validation-for="ComplexityID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceID" class="control-label text-light"></label>
+                <select asp-for="PriceID" class="form-control" asp-items="ViewBag.PriceID"></select>
+                <span asp-validation-for="PriceID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeightID" class="control-label text-light"></label>
+                <select asp-for="WeightID" class="form-control" asp-items="ViewBag.WeightID"></select>
+                <span asp-validation-for="WeightID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Alergeny" class="control-label text-light"></label>
+                <input asp-for="Alergeny" class="form-control" />
+                <span asp-validation-for="Alergeny" class="text-danger"></span>
+            </div>
+            <span class="form-group">
+                <button type="submit" class="btn">
+                    <img src="~/bootstrap-icons/check-circle.svg" class="zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Uložiť">
+                </button>
+            </span>
+            <span class="form-group">
+                <a asp-action="DisplayMeals">
+                    <img src="~/bootstrap-icons/card-text.svg" class="zoom-sm hvr-csr-pt" alt="" width="32" height="32" title="Zobraziť položky">
+                </a>
+            </span>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MenuGenerator.Models.SoupKind>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_mealOptionsLayout";
+}
+
+
+<p class="text-light">Na polievkách sa pracuje</p>
+
+@*<ul class="nav mt-2">
+    <li class="nav-item">
+        <h4 class="nav-link text-light">Druh polievky</h4>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link btn rounded-0 shadow-none" asp-action="Create">
+            <img src="~/bootstrap-icons/plus-circle.svg" class="zoom-sm hvr-csr-pt mr-2" alt="" width="32" height="32" title="Vytvoriť">
+        </a>
+    </li>
+</ul>
+<table class="table table-sm table-borderless mt-2">
+    <thead>
+        <tr>
+            <th class="text-light black-dark">
+                @Html.DisplayNameFor(model => model.Nazov)
+            </th>
+            <th class="text-light black-dark"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-light black">
+                    @Html.DisplayFor(modelItem => item.Nazov)
+                </td>
+                <td class="text-light d-flex flex-row-reverse black height-30">
+                    <a class="mr-2" asp-action="Details" asp-route-id="@item.ID">
+                        <img src="~/bootstrap-icons/eye.svg" class="zoom-sm hvr-csr-pt" alt="" width="20" height="20" title="Detaily">
+                    </a>
+                    <a class="mr-2" asp-action="Edit" asp-route-id="@item.ID">
+                        <img src="~/bootstrap-icons/pen.svg" class="zoom-sm hvr-csr-pt" alt="" width="20" height="20" title="Upraviť">
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@
